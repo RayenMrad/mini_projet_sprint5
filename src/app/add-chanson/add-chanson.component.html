@@ -1,0 +1,88 @@
+<div class="container">
+  <div>
+    <h2>Ajouter un Chanson :</h2>
+  </div>
+  <form>
+    <div hidden class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID Chanson</label>
+      <input
+        type="text"
+        [(ngModel)]="newChanson.idChanson"
+        name="idChanson"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Chanson</label>
+      <input
+        type="text"
+        [(ngModel)]="newChanson.nomChanson"
+        name="nomChanson"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Artiste</label>
+      <input
+        type="text"
+        [(ngModel)]="newChanson.nomArtiste"
+        name="nomArtiste"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Email</label>
+      <input
+        type="text"
+        [(ngModel)]="newChanson.email"
+        name="email"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Duree</label>
+      <input
+        type="number"
+        [(ngModel)]="newChanson.duree"
+        name="duree"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Vues</label>
+      <input
+        type="text"
+        [(ngModel)]="newChanson.vues"
+        name="vues"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date Sortie</label>
+      <input
+        type="date"
+        [(ngModel)]="newChanson.dateSortie"
+        name="dateSortie"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Genre</label>
+      <select
+        class="form-control form-control-lg"
+        id="idGen"
+        name="idGen"
+        [(ngModel)]="newIdGen"
+      >
+        @for(cat of genres; track cat.idGen){
+        <option [value]="cat.idGen">{{ cat.nomGen }}</option>
+        }
+      </select>
+    </div>
+    <div class="mt-2">
+      <button type="submit" (click)="addChanson()" class="btn btn-success">
+        Ajouter
+      </button>
+    </div>
+  </form>
+</div>

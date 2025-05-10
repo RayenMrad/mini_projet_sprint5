@@ -1,0 +1,90 @@
+<div class="container">
+  <div>
+    <h2>Modifier un Chanson :</h2>
+  </div>
+  <form>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID Chanson</label>
+      <input
+        readonly
+        type="text"
+        [(ngModel)]="currentChanson.idChanson"
+        name="idChanson"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Chanson</label>
+      <input
+        type="text"
+        [(ngModel)]="currentChanson.nomChanson"
+        name="nomChanson"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Artiste</label>
+      <input
+        type="text"
+        [(ngModel)]="currentChanson.nomArtiste"
+        name="nomArtiste"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Email</label>
+      <input
+        type="text"
+        [(ngModel)]="currentChanson.email"
+        name="email"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Duree</label>
+      <input
+        type="number"
+        [(ngModel)]="currentChanson.duree"
+        name="duree"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Vues</label>
+      <input
+        type="text"
+        [(ngModel)]="currentChanson.vues"
+        name="vues"
+        class="form-control"
+      />
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date Sortie</label>
+      <input
+        type="date"
+        [ngModel]="currentChanson.dateSortie | date : 'yyyy-MM-dd'"
+        (ngModelChange)="currentChanson.dateSortie = $event"
+        name="dateSortie"
+        class="form-control"
+      />
+    </div>
+    <label>Genre</label>
+    <select
+      class="form-control form-control-lg"
+      id="idGen"
+      name="idGen"
+      [(ngModel)]="updatedGenId"
+    >
+      @for(cat of genres; track cat.idGen) {
+      <option [value]="cat.idGen">{{ cat.nomGen }}</option>
+      }
+    </select>
+
+    <div class="mt-2">
+      <button type="submit" (click)="updateChanson()" class="btn btn-success">
+        Modifer
+      </button>
+    </div>
+  </form>
+</div>

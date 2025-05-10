@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+    <label>Genres </label>
+    <select
+      class="form-control form-control-lg"
+      id="idGen"
+      name="idGen"
+      [(ngModel)]="IdGenre"
+      (change)="onChange()"
+    >
+      @for(cat of genres;track cat.idGen) {
+      <option value="{{ cat.idGen }}">{{ cat.nomGen }}</option>
+      }
+    </select>
+  </div>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>Id</th>
+          <th>Nom Chanson</th>
+          <th>Nom Artiste</th>
+          <th>Email</th>
+          <th>Duree</th>
+          <th>Vues</th>
+          <th>Date Sortie</th>
+          <th>Genre</th>
+        </tr>
+        @for (chanson of chansons; track chanson.idChanson) {
+        <tbody>
+          <tr>
+            <td>{{ chanson.idChanson }}</td>
+            <td>{{ chanson.nomChanson }}</td>
+            <td>{{ chanson.nomArtiste }}</td>
+            <td>{{ chanson.email }}</td>
+            <td>{{ chanson.duree }}</td>
+            <td>{{ chanson.vues }}</td>
+            <td>{{ chanson.dateSortie | date : "dd/MM/yyyy" }}</td>
+            @if(chanson.genre){
+            <td>{{ chanson.genre.nomGen }}</td>
+            } @else {
+            <td>PAS DE Genre</td>
+            }
+            <!--
+<td><a class="btn btn-danger"
+(click)="supprimerProduit(produit)">Supprimer</a></td>
+<td><a class="btn btn-success"
+[routerLink]="['/updateProduit',produit.idProduit]">Modifier</a></td> -->
+          </tr>
+        </tbody>
+        }
+      </table>
+    </div>
+  </div>
+</div>
