@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
-import { User } from '../model/user.model';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Injectable } from "@angular/core";
+import { User } from "../model/user.model";
+import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   /*users: User[] = [
     { username: 'admin', password: '123', roles: ['ADMIN'] },
     { username: 'rayen', password: '123', roles: ['USER'] },
   ];*/
-  apiURL: string = 'http://localhost:5001/users';
+  apiURL: string = "http://localhost:5001/users";
   token!: string;
   private helper = new JwtHelperService();
 
@@ -20,16 +20,26 @@ export class AuthService {
   public isloggedIn: Boolean = false;
 
   public roles!: string[];
+  public regitredUser: User = new User();
+
   constructor(private router: Router, private http: HttpClient) {}
 
+  setRegistredUser(user: User) {
+    this.regitredUser = user;
+  }
+
+  getRegistredUser() {
+    return this.regitredUser;
+  }
+
   login(user: User) {
-    return this.http.post<User>(this.apiURL + '/login', user, {
-      observe: 'response',
+    return this.http.post<User>(this.apiURL + "/login", user, {
+      observe: "response",
     });
   }
 
   saveToken(jwt: string) {
-    localStorage.setItem('jwt', jwt);
+    localStorage.setItem("jwt", jwt);
     this.token = jwt;
     this.isloggedIn = true;
     this.decodeJWT();
@@ -42,7 +52,7 @@ export class AuthService {
     this.loggedUser = decodedToken.sub;
   }
   loadToken() {
-    this.token = localStorage.getItem('jwt')!;
+    this.token = localStorage.getItem("jwt")!;
     this.decodeJWT();
   }
 
@@ -58,8 +68,8 @@ export class AuthService {
     this.roles = undefined!;
     this.token = undefined!;
     this.isloggedIn = false;
-    localStorage.removeItem('jwt');
-    this.router.navigate(['/login']);
+    localStorage.removeItem("jwt");
+    this.router.navigate(["/login"]);
   }
   /*SignIn(user: User): Boolean {
     let validUser: Boolean = false;
@@ -80,7 +90,7 @@ export class AuthService {
   }*/
   isAdmin(): Boolean {
     if (!this.roles) return false;
-    return this.roles.indexOf('ADMIN') >= 0;
+    return this.roles.indexOf("ADMIN") >= 0;
   }
 
   setLoggedUserFromLocalStorage(login: string) {
@@ -95,4 +105,14 @@ export class AuthService {
       }
     });
   }*/
+
+  registerUser(user: User) {
+    return this.http.post<User>(this.apiURL + "/register", user, {
+      observe: "response",
+    });
+  }
+
+  validateEmail(code: string) {
+    return this.http.get<User>(this.apiURL + "/verifyEmail/" + code);
+  }
 }

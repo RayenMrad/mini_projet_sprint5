@@ -8,6 +8,8 @@ import { ListeGenresComponent } from './liste-genres/liste-genres.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { chansonGuard } from './chanson.guard';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 export const routes: Routes = [
   { path: 'chansons', component: ChansonsComponent },
@@ -22,6 +24,8 @@ export const routes: Routes = [
   { path: 'listeGenres', component: ListeGenresComponent },
   { path: 'login', component: LoginComponent },
   { path: 'app-forbidden', component: ForbiddenComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'verifEmail', component: VerifEmailComponent },
 
   { path: '', redirectTo: 'chansons', pathMatch: 'full' },
 ];
